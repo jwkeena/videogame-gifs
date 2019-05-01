@@ -19,16 +19,12 @@ function getGIFS (queryURL) {
     )
 }
 
-$("#delete-gifs").on("click", function () {
-    $(".gifs").empty();
-})
-
 $(document.body).on("click", ".request-gifs", function () {
     baseURL = "http://api.giphy.com/v1/gifs/search?q=";
     buttonValue = $(this).val();
     console.log
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=5";
+    limit = "&limit=10";
     queryURL = baseURL + buttonValue + apiKey + limit
     getGIFS(queryURL);
 })
@@ -37,13 +33,13 @@ $(document.body).on("click", ".request-gifs", function () {
 $(document.body).on("click", ".gif", function() {
     var state = $(this).attr("data-state");
     if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
-      $(this).attr("data-state", "animate");
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
     } else {
-      $(this).attr("src", $(this).attr("data-still"));
-      $(this).attr("data-state", "still");
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
     }
-  });
+});
 
 $("#gifs-button").on("click", function () {
     //building queryURL
@@ -51,7 +47,11 @@ $("#gifs-button").on("click", function () {
     userInput = $("#input").val();
     console.log(userInput)
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=5";
+    limit = "&limit=10";
     queryURL = baseURL + userInput + apiKey + limit
     getGIFS(queryURL);
 });
+
+$("#delete-gifs").on("click", function () {
+    $(".gifs").empty();
+})
