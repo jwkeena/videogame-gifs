@@ -13,14 +13,14 @@ function getGIFS (queryURL) {
                 newImage.attr("src", data[i].images.fixed_height_small_still.url);
                 newImage.attr("data-still", data[i].images.fixed_height_small_still.url);
                 newImage.attr("data-animate", data[i].images.fixed_height_small.url);
-                $("#gifs").prepend(newImage)
+                $(".gifs").prepend(newImage)
             }
         }
     )
 }
 
 $("#delete-gifs").on("click", function () {
-    $("#gifs").empty();
+    $(".gifs").empty();
 })
 
 $(document.body).on("click", ".request-gifs", function () {
@@ -28,7 +28,7 @@ $(document.body).on("click", ".request-gifs", function () {
     buttonValue = $(this).val();
     console.log
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=10";
+    limit = "&limit=5";
     queryURL = baseURL + buttonValue + apiKey + limit
     getGIFS(queryURL);
 })
@@ -51,7 +51,7 @@ $("#gifs-button").on("click", function () {
     userInput = $("#input").val();
     console.log(userInput)
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=10";
+    limit = "&limit=5";
     queryURL = baseURL + userInput + apiKey + limit
     getGIFS(queryURL);
 });
