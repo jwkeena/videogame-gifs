@@ -20,7 +20,7 @@ function getGIFS (queryURL) {
 }
 
 $(document.body).on("click", ".request-gifs", function () {
-    baseURL = "http://api.giphy.com/v1/gifs/search?q=";
+    baseURL = "https://api.giphy.com/v1/gifs/search?q=";
     buttonValue = $(this).val();
     console.log
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
@@ -43,7 +43,7 @@ $(document.body).on("click", ".gif", function() {
 
 $("#gifs-button").on("click", function () {
     //building queryURL
-    baseURL = "http://api.giphy.com/v1/gifs/search?q=";
+    baseURL = "https://api.giphy.com/v1/gifs/search?q=";
     userInput = $("#input").val();
     console.log(userInput)
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
