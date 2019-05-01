@@ -19,6 +19,10 @@ function getGIFS (queryURL) {
     )
 }
 
+$("#delete-gifs").on("click", function () {
+    $("#gifs").empty();
+})
+
 $(document.body).on("click", ".request-gifs", function () {
     baseURL = "http://api.giphy.com/v1/gifs/search?q=";
     buttonValue = $(this).val();

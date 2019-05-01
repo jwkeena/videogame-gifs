@@ -1,17 +1,68 @@
-body, #input, button {
+body, #input {
+    background-image: url(background.png);
+    color: white;
     font-family: 'Press Start 2P', cursive;
+    padding: 10px;
 }
 
-#buttons {
-    text-align: center;
-    margin: 10px 0px 10px 0px;
-    
+button {
+    color: purple;
+    background-color: yellow;
+    font-family: 'Press Start 2P', cursive;
+    padding: 10px;
+    margin: 10px 0px 0px 0px;
+    border-radius: 5px;
 }
 
-#gifs {
+button:hover {
+    color: teal;
+}
+
+button:active {
+    background: #e5e5e5;
+    -webkit-box-shadow: inset 0px 0px 5px #c1c1c1;
+    -moz-box-shadow: inset 0px 0px 5px #c1c1c1;
+    box-shadow: inset 0px 0px 5px #c1c1c1;
+    outline: none;
+}
+
+.buttons-container {
+    text-align: left;
+    background-color: violet;
+    border-radius: 5px;
+    opacity: .95;
+    padding: 10px;
+}
+
+#gifs, #controls {
     text-align: center;
 }
 
 .gif {
+    border: 5px solid rgb(82, 224, 254);
+    border-radius: 3px;
     margin: 5px;
+}
+
+.gif:hover {
+    animation: rainbow 1s steps(36) infinite;
+    -webkit-animation: rainbow 1s steps(36) infinite;
+    -moz-animation: rainbow 1s steps(36) infinite;
+    -o-animation: rainbow 1s steps(36) infinite;
+}
+
+/*Rainbow effect, adapted from https://gist.github.com/ajaegers/52a82619cc191f898ec4*/
+@keyframes rainbow {
+    from {
+        filter: hue-rotate(0deg);
+        -webkit-filter: hue-rotate(0deg);
+        -moz-filter: hue-rotate(0deg);
+        -o-filter: hue-rotate(0deg);
+    }
+    to {
+        filter: hue-rotate(360deg);
+        -webkit-filter: hue-rotate(360deg);
+        -moz-filter: hue-rotate(360deg);
+        -o-filter: hue-rotate(360deg);
+    }
 }
