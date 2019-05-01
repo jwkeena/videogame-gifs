@@ -1,0 +1,17 @@
+body, #input, button {
+    font-family: 'Press Start 2P', cursive;
+}
+
+#buttons {
+    text-align: center;
+    margin: 10px 0px 10px 0px;
+    
+}
+
+#gifs {
+    text-align: center;
+}
+
+.gif {
+    margin: 5px;
+}
