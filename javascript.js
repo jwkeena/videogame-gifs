@@ -1,4 +1,6 @@
-let videogames = ["nintendo", "n64", "virtual boy", "super nintendo", "game boy", "sega", "sega saturn", "sega genesis", "sega nomad", "sega game gear", "sony", "playstation"]
+let videogames = ["n64", "virtual boy", "super nintendo", "game boy color", "sega genesis", "sega nomad", "game gear", "sony ps1", "mario 64", "green hill zone", "crash bandicoot", "spyro the dragon", "banjo kazooie", "sega saturn nights"]
+
+let isRatingDisplayed = true;
 
 function renderButtons() {
     $(".buttons-container").empty();
@@ -30,6 +32,14 @@ function getGIFS (queryURL) {
             console.log(response.data)
             let data = response.data;
             for (i=0; i < data.length; i++){
+
+                //building new imageWrapper (to allow absolute position of rating)
+                var imageWrapper = $("<div>")
+                imageWrapper.css("position", "relative");
+                imageWrapper.css("display", "inline-block");
+                $(".gifs").prepend(imageWrapper);
+
+                //building new gif
                 var newImage = $("<img>");
                 newImage.css("display", "inline-block");
                 newImage.attr("class", "gif");
@@ -37,7 +47,14 @@ function getGIFS (queryURL) {
                 newImage.attr("src", data[i].images.fixed_height_small_still.url);
                 newImage.attr("data-still", data[i].images.fixed_height_small_still.url);
                 newImage.attr("data-animate", data[i].images.fixed_height_small.url);
-                $(".gifs").prepend(newImage)
+                imageWrapper.append(newImage)
+
+                //attaching rating to each gif
+                var newRating = $("<p>");
+                newRating.text(data[i].rating);
+                newRating.attr("class", "rating");
+                imageWrapper.append(newRating);
+                
             }
         }
     )
@@ -58,7 +75,6 @@ $(document.body).on("click", ".gif", function() {
 //event delegation to add listener to all buttons (whether or not they are in original array)
 $(document.body).on("click", ".button", function() {
     let searchTerm = $(this).data("name")
-    console.log("searchTerm: " + searchTerm)
     buildQueryURL(searchTerm);
 })
 
@@ -73,6 +89,18 @@ $("#gifs-button").on("click", function () {
 //clears all displayed gifs
 $("#delete-gifs").on("click", function () {
     $(".gifs").empty();
+})
+
+//shows or hides rating on gifs
+$("#ratings-button").on("click", function () {
+    if (isRatingDisplayed) {
+        !isRatingDisplayed;
+        $(".rating").toggle();
+    } else {
+        !isRatingDisplayed
+        $(".rating").toggle();
+    }
+    
 })
 
 //initial render of buttons on page load
