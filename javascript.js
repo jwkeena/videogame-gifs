@@ -1,3 +1,27 @@
+let videogames = ["nintendo", "n64", "virtual boy", "super nintendo", "game boy", "sega", "sega saturn", "sega genesis", "sega nomad", "sega game gear", "sony", "playstation"]
+
+function renderButtons() {
+    $(".buttons-container").empty();
+
+    for (let i = 0; i < videogames.length; i++){
+        let button = $("<button>");
+        button.addClass("button");
+        button.attr("data-name", videogames[i]);
+        button.text(videogames[i]);
+        $(".buttons-container").append(button);
+    }
+}
+
+//whenever a gif button is clicked, this function runs, which then calls the getGIFS function
+function buildQueryURL(searchTerm) {
+    baseURL = "https://api.giphy.com/v1/gifs/search?q=";
+    apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
+    limit = "&limit=10";
+    queryURL = baseURL + searchTerm + apiKey + limit
+    getGIFS(queryURL);
+}
+
+//calls GIFS from the GIPHY API
 function getGIFS (queryURL) {
     $.ajax(
         {url: queryURL,
@@ -19,16 +43,6 @@ function getGIFS (queryURL) {
     )
 }
 
-$(document.body).on("click", ".request-gifs", function () {
-    baseURL = "https://api.giphy.com/v1/gifs/search?q=";
-    buttonValue = $(this).val();
-    console.log
-    apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=10";
-    queryURL = baseURL + buttonValue + apiKey + limit
-    getGIFS(queryURL);
-})
-
 //event delegation to add listener to start or stop gif animation
 $(document.body).on("click", ".gif", function() {
     var state = $(this).attr("data-state");
@@ -41,17 +55,25 @@ $(document.body).on("click", ".gif", function() {
     }
 });
 
+//event delegation to add listener to all buttons (whether or not they are in original array)
+$(document.body).on("click", ".button", function() {
+    let searchTerm = $(this).data("name")
+    console.log("searchTerm: " + searchTerm)
+    buildQueryURL(searchTerm);
+})
+
+//dynamically adding new buttons as soon as search terms are added to the videogames array
 $("#gifs-button").on("click", function () {
-    //building queryURL
-    baseURL = "https://api.giphy.com/v1/gifs/search?q=";
+    // event.preventDefault(); is unnecessary since I'm not using a form
     userInput = $("#input").val();
-    console.log(userInput)
-    apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=10";
-    queryURL = baseURL + userInput + apiKey + limit
-    getGIFS(queryURL);
+    videogames.push(userInput);
+    renderButtons();
 });
 
+//clears all displayed gifs
 $("#delete-gifs").on("click", function () {
     $(".gifs").empty();
 })
+
+//initial render of buttons on page load
+renderButtons();
