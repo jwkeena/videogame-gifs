@@ -1,4 +1,4 @@
-let videogames = ["n64", "virtual boy", "super nintendo", "game boy color", "sega genesis", "sega nomad", "game gear", "sony ps1", "mario 64", "green hill zone", "crash bandicoot", "spyro the dragon", "banjo kazooie", "sega saturn nights"]
+let videogames = ["n64", "virtual boy", "super nintendo", "game boy color", "sega genesis", "game gear", "sony ps1", "mario 64", "green hill zone", "crash bandicoot", "spyro the dragon", "banjo kazooie", "pokemon red", "ocarina of time"]
 
 let isRatingDisplayed = true;
 
@@ -18,8 +18,8 @@ function renderButtons() {
 function buildQueryURL(searchTerm) {
     baseURL = "https://api.giphy.com/v1/gifs/search?q=";
     apiKey = "&api_key=0390oddk4iEFytYmuT0Y4rBFADo3F1j0";
-    limit = "&limit=10";
-    queryURL = baseURL + searchTerm + apiKey + limit
+    restrictions = "&limit=10&rating=pg-13";
+    queryURL = baseURL + searchTerm + apiKey + restrictions
     getGIFS(queryURL);
 }
 
@@ -54,7 +54,6 @@ function getGIFS (queryURL) {
                 newRating.text(data[i].rating);
                 newRating.attr("class", "rating");
                 imageWrapper.append(newRating);
-                
             }
         }
     )
@@ -82,8 +81,18 @@ $(document.body).on("click", ".button", function() {
 $("#gifs-button").on("click", function () {
     // event.preventDefault(); is unnecessary since I'm not using a form
     userInput = $("#input").val();
-    videogames.push(userInput);
-    renderButtons();
+    if (userInput === "") {
+        alert("you have to choose a topic!")
+    //check for weirdos
+    } else if (userInput ==="butt farts") {
+        alert("nice try, Mark");
+    } else if (userInput ==="poop" || userInput === "fart") {
+        alert("why? just, why?")
+    //re-render buttons
+    } else {
+        videogames.push(userInput);
+        renderButtons();
+    }
 });
 
 //clears all displayed gifs
