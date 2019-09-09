@@ -7,5 +7,5 @@ Practice manipulating DOM elements and images with jQuery, making API calls, and
 # try it yourself!
 https://jwkeena.github.io/videogame-gifs/
 
-![](videogame-gifs.gif)
+![](videogame-gifs.png)
 
